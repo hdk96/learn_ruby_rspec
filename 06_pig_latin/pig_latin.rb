@@ -1,34 +1,34 @@
 VOYELLE = ["a", "e", "i", "o", "u"]
 CONSONNE_REX = /(\A[^aeio]{1,3})(\w*)/ 
 
-def translate(word) 
-  words = word.split(" ")
-  translated_words =  apply_translations(words)
-  array_to_string(translated_words)
+def translate(mot) 
+  mots = mot.split(" ")
+  mots_traduit =  traduction(mots)
+  array_en_string(mots_traduit)
   
 end
 
 private
 
-def apply_translations(array)
-    translated_words = array.map do |wrd|
-    start_with_vowel?(wrd) ? vowel_translate(wrd) : consonant_translate(wrd)
+def traduction(array)
+    mots_traduit = array.map do |wrd|
+    commence_par_voyelle?(wrd) ? traducteur_voyelle(wrd) : traducteur_consonne(wrd)
   end
 end
 
-def array_to_string(array)
+def array_en_string(array)
   output = array.inject(""){ |result, item| result << item + " "}.strip
 end
 
-def start_with_vowel?(word)
-  VOYELLE.include?(word[0])
+def commence_par_voyelle?(mot)
+  VOYELLE.include?(mot[0])
 end
 
-def vowel_translate(word)
-  word + "ay"
+def traducteur_voyelle(mot)
+  mot + "ay"
 end
 
-def consonant_translate(word)
-  prefix = word.match(CONSONNE_REX)
-  word = prefix[2] + prefix[1] + "ay"
+def traducteur_consonne(mot)
+  prefix = mot.match(CONSONNE_REX)
+  mot = prefix[2] + prefix[1] + "ay"
 end
